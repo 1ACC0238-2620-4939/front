@@ -14,7 +14,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         setContent {
-            TraktoRouteTheme {
+            TraktoRouteTheme(dynamicColor = false) {
                 AppNavHost()
             }
         }
