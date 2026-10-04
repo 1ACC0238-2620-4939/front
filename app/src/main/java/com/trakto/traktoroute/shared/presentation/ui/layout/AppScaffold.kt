@@ -14,6 +14,7 @@ fun AppScaffold(
     onTabSelected: (AppTab) -> Unit,
     modifier: Modifier = Modifier,
     showBottomBar: Boolean = true,
+    floatingActionButton: @Composable () -> Unit = {},
     content: @Composable (PaddingValues) -> Unit
 ) {
     Scaffold(
@@ -25,7 +26,8 @@ fun AppScaffold(
                     onTabSelected = onTabSelected
                 )
             }
-        }
+        },
+        floatingActionButton = floatingActionButton
     ) { innerPadding ->
         content(innerPadding)
     }

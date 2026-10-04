@@ -1,6 +1,11 @@
 package com.trakto.traktoroute.shared.presentation.navigation
 
+import androidx.compose.foundation.layout.consumeWindowInsets
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -15,6 +20,7 @@ import com.trakto.traktoroute.fleet.presentation.ui.screens.VehicleListScreen
 import com.trakto.traktoroute.profiles.presentation.ui.screens.ProfileScreen
 import com.trakto.traktoroute.shared.presentation.ui.layout.AppScaffold
 import com.trakto.traktoroute.trip.presentation.ui.screens.TripListScreen
+import com.trakto.traktoroute.shared.presentation.ui.components.AddFloatingActionButton
 
 @Composable
 fun AppNavHost(modifier: Modifier = Modifier) {
@@ -23,7 +29,6 @@ fun AppNavHost(modifier: Modifier = Modifier) {
     val backStackEntry by navController.currentBackStackEntryAsState()
     val destination = backStackEntry?.destination
 
-    // La pestaña seleccionada depende de la pantalla actual.
     val selectedTab = when {
         destination?.hasRoute<VehiclesRoute>() == true -> AppTab.VEHICLES
         destination?.hasRoute<DriversRoute>() == true -> AppTab.DRIVERS
@@ -43,21 +48,38 @@ fun AppNavHost(modifier: Modifier = Modifier) {
             }
 
             navController.navigate(route) {
-                // Guarda el estado de la pestaña que abandonas.
                 popUpTo(navController.graph.findStartDestination().id) {
                     saveState = true
                 }
-
-                // Evita duplicar el destino y recupera su estado.
                 launchSingleTop = true
                 restoreState = true
+            }
+        },
+        floatingActionButton = {
+            if (selectedTab != AppTab.PROFILE) {
+                val description = when (selectedTab) {
+                    AppTab.TRIPS -> "Agregar viaje"
+                    AppTab.VEHICLES -> "Agregar vehículo"
+                    AppTab.DRIVERS -> "Agregar conductor"
+                    AppTab.PROFILE -> ""
+                }
+
+                AddFloatingActionButton(
+                    description = description,
+                    onClick = {
+                        // Conectaremos la navegación de creación después.
+                    }
+                )
             }
         }
     ) { innerPadding ->
         NavHost(
             navController = navController,
             startDestination = TripsRoute,
-            modifier = Modifier.padding(innerPadding)
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding)
+                .consumeWindowInsets(innerPadding)
         ) {
             composable<TripsRoute> {
                 TripListScreen()
