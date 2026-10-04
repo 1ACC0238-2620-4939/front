@@ -1,7 +1,6 @@
 package com.trakto.traktoroute.shared.presentation.navigation
 
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -13,6 +12,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.trakto.traktoroute.fleet.presentation.ui.screens.DriverListScreen
 import com.trakto.traktoroute.fleet.presentation.ui.screens.VehicleListScreen
+import com.trakto.traktoroute.profiles.presentation.ui.screens.ProfileScreen
 import com.trakto.traktoroute.shared.presentation.ui.layout.AppScaffold
 import com.trakto.traktoroute.trip.presentation.ui.screens.TripListScreen
 
@@ -72,7 +72,7 @@ fun AppNavHost(modifier: Modifier = Modifier) {
             }
 
             composable<ProfileRoute> {
-                Text("Perfil")
+                ProfileScreen()
             }
         }
     }
