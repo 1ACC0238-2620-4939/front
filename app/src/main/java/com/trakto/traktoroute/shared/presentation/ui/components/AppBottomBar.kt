@@ -6,15 +6,10 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import com.trakto.traktoroute.shared.presentation.navigation.AppTab
 import com.trakto.traktoroute.shared.presentation.ui.icons.DirectionsCar
 import com.trakto.traktoroute.shared.presentation.ui.icons.FactCheck
 import com.trakto.traktoroute.shared.presentation.ui.icons.Person
-
-enum class AppTab {
-    TRIPS,
-    VEHICLES,
-    DRIVERS
-}
 
 @Composable
 fun AppBottomBar(
@@ -57,6 +52,18 @@ fun AppBottomBar(
                 )
             },
             label = { Text("Conductores") }
+        )
+
+        NavigationBarItem(
+            selected = selectedTab == AppTab.PROFILE,
+            onClick = { onTabSelected(AppTab.PROFILE) },
+            icon = {
+                Icon(
+                    imageVector = Person,
+                    contentDescription = null
+                )
+            },
+            label = { Text("Perfil") }
         )
     }
 }

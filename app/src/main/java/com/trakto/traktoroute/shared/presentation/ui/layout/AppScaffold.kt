@@ -6,7 +6,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.trakto.traktoroute.shared.presentation.ui.components.AppBottomBar
-import com.trakto.traktoroute.shared.presentation.ui.components.AppTab
+import com.trakto.traktoroute.shared.presentation.navigation.AppTab
 
 @Composable
 fun AppScaffold(
