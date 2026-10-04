@@ -67,7 +67,7 @@ fun ProfileScreen(
             }
 
             Text(
-                text = "Alexander Fernández Torres",
+                text = "Alexander Fernández Garfias",
                 style = MaterialTheme.typography.titleLarge
             )
         }
